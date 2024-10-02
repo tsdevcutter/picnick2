@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+///////////////////////////////////////////////////////////////////
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
@@ -43,10 +43,7 @@ router.post("/login", async (req, res) => {
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
 
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-    /*
-    console.log("IDEA 03 DATATBASE PASSWORD:: " + originalPassword);
-    console.log("IDEA 03 SUBMITTED PASSWORD:: " + req.body.password);
-    */
+    
     if(originalPassword !== req.body.password ){
       return  res.status(401).json("Wrong password or email!");
     }
@@ -62,11 +59,10 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({ ...info, accessToken });
   } catch (err) {
-    console.log("ERROR PAAA ");
-    res.status(500).json(err);
-
+    return res.status(500).json(err);
   }
 });
+////////////////////////////////////////////////////////////////////
 //FORGOT PASSWORD
 router.put("/forgot", async (req, res) => {
   try {
@@ -105,11 +101,10 @@ router.put("/passreset", async (req, res) => {
    
     const Newpassword = CryptoJS.AES.encrypt( postedUser.password, process.env.SECRET_KEY).toString();
     const userId = user._id;
-    //console.log(userId);
+ 
     const userContent = {
       "password": Newpassword, 
     }
-    //console.log(userContent);
  
     const updateUser = await User.findByIdAndUpdate(
        userId,
@@ -118,7 +113,7 @@ router.put("/passreset", async (req, res) => {
       },
       { new: true }
     );
-    //console.log(updateUser);
+
     const passReset = {
       "status": "success",
       "message": "Your new password has been updated",
@@ -130,7 +125,6 @@ router.put("/passreset", async (req, res) => {
   } catch (err) {
     return res.status(500).json(err);
   }
-
 });
 ////////////////////////  ////////  ////////
 //GET list of suppliers that you are authorised to get according to user type
@@ -142,7 +136,6 @@ router.get("/supplies", async (req, res) => {
      } catch (err) {
        return res.status(500).json(err);
      }
-
 });
 ////////////////////////  ////////  ////////
 router.put("/addusertosup", async (req, res) => {
@@ -169,14 +162,13 @@ router.put("/addusertosup", async (req, res) => {
       },
       { new: true }
     );
-    console.log(upUser);
+    
     res.status(200).json(updatedSupplierid);
     
   } catch (err) {
-    console.log("bothatha");
     return res.status(500).json(err);
   }
 });
-////////////////////////  ////////  ////////
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 module.exports = router;
