@@ -22,7 +22,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log("LIVE Connection - Picnic API_KEY Catalogue 3.1.0"))
+  .then(() => console.log("LIVE Connection - Picnick API_KEY Catalogue 3.1.0"))
   .catch((err) => {
     console.error(err);
   });
