@@ -24,9 +24,10 @@ const Token = require("./models/Token");
     });
 
   } else if (API_KEY) {
+    /*
     console.log(") verifyToken (");
     console.log(API_KEY);
-
+    */
     try {
       const token = await Token.findOne({ token: API_KEY });
       if (token) {
