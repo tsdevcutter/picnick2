@@ -70,6 +70,7 @@ router.put("/collect/single", async (req, res) => {
                   },
                   { new: true }
                 );
+                console.log("PICK ACKER ADD");
                 console.log(pickAckerAdd);
             }else {
               // If not add to divergent list.
@@ -114,7 +115,6 @@ router.put("/collect/single", async (req, res) => {
     }catch(asem){
       console.log("Error")
       console.log(asem);
-      console.log("************")
       return res.status(500).json(asem);
     }
 });
@@ -193,7 +193,6 @@ router.put("/update/medicine/schedule/v2/", async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 });
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
